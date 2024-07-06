@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premiumstore.am</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+            
+            body, html 
+            {
+                color: #ffffff;
+                background-color: rgb(11, 5, 44);
+                margin: 0;
+                padding: 0;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-family: Arial, sans-serif;
+            }
+            .main {
+                    text-align: center;
+            }
+            .left img {
+            display: block;
+            margin: 0 auto;
+            }
+    
+            .ps {
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+            } 
+            
+            .left img:hover {
+                opacity: 0.6;
+            }
+            .left button{
+                margin-top: 50px;
+                padding: 10px;
+            }
+            .upgrade {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.upgrade:disabled {
+    background-color: #3d3d3d;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        
+        <div class="left">
+            <h1>PSSTORE</h1>
+            <h3>PSCOINS: <span class="click">0</span></h3>
+            <img class="ps" src="img/IMG_20240513_235227_771.jpg" onclick="incrimentclick()">
+            <button class="upgrade" onclick="upgradeHamster()" id="upgradeButton">Upgrade your PS (Cost: 10 coins)</button>
+        </div>
+        <div class="right">
+        
+        </div>
+    </div>
+
+    <script>
+let clicknum = document.querySelector('.click');
+let coinCount = parseFloat(clicknum.innerHTML);
+let upgradeCost = 10;
+let coinsPerClick = 1;
+
+function incrimentclick() {
+    coinCount += coinsPerClick;
+    clicknum.innerHTML = coinCount;
+    updateUpgradeButton();
+}
+
+function upgradeHamster() {
+    if (coinCount >= upgradeCost) {
+        coinCount -= upgradeCost;
+        coinsPerClick += 1;
+        upgradeCost *= 2; // Increase the cost for the next upgrade
+        clicknum.innerHTML = coinCount;
+        document.getElementById('upgradeButton').textContent = `Upgrade Hamster (Cost: ${upgradeCost} coins)`;
+        updateUpgradeButton();
+    }
+}
+
+function updateUpgradeButton() {
+    document.getElementById('upgradeButton').disabled = coinCount < upgradeCost;
+}
+
+    </script>
+</body>
+</html>
